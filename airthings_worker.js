@@ -1,9 +1,10 @@
 require('dotenv').config();
 const { log } = require('./logger');
 const { checkToken } = require('./token');
+const { getLatestSamples } = require('./api');
 
 async function startWorker() {
-    if (!process.env.AIRTHINGS_CLIENT_ID || !process.env.AIRTHINGS_SECRET) {
+    if (!process.env.AIRTHINGS_CLIENT_ID || !process.env.AIRTHINGS_SECRET || !process.env.AIRTHINGS_SERIAL_NIMBER) {
         log('Missing required environment variables!');
         process.exit(1);
     }
@@ -13,9 +14,11 @@ async function startWorker() {
     while (true) {
         try {
             const token = await checkToken();
-
-            // Here you can add your actual work with the API
-            // For example, getting device readings, etc.
+            
+            // Get latest samples from the device
+            const data = await getLatestSamples(token, process.env.AIRTHINGS_SERIAL_NIMBER);
+            log('Latest samples:');
+            log(JSON.stringify(data, null, 2));
 
             // Wait 5 minutes before next check
             await new Promise(resolve => setTimeout(resolve, 300000));
