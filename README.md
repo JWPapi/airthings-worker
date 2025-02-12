@@ -56,7 +56,7 @@ PUSHOVER_APP_TOKEN=your_pushover_app_token
 Start the worker:
 
 ```bash
-node airthings_worker.js
+node index.js
 ```
 
 The worker will:
@@ -68,7 +68,7 @@ The worker will:
 
 ## Project Structure
 
-- `airthings_worker.js` - Main worker process
+- `index.js` - Main worker process
 - `api.js` - Airthings API integration
 - `token.js` - Token management
 - `notifications.js` - Pushover notification handling
