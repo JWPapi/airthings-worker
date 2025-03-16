@@ -29,8 +29,7 @@ async function startWorker() {
                 sendNotification('High CO2 Alert', `CO2 level is ${data.data.co2} ppm!`);
             }
 
-            // Wait 5 minutes before next check
-            await new Promise(resolve => setTimeout(resolve, 300000));
+            await new Promise(resolve => setTimeout(resolve, 15 * 60 * 1000));
 
         } catch (error) {
             log(`Error: ${error.message}`);
